@@ -1,8 +1,6 @@
 <h2>New Book</h2>
-<form action ="/books" method ="POST"> <!-- Submission form for creating an author -->
+<form action ="/books" method ="POST" enctype="multipart/form-data"> <!-- Submission form for creating an author -->
     <%- include('_form_fields') %> <!-- Inserts _form_fields.ejs file -->
-    <br>
     <a href="/books">Cancel</a>
-    <br>
     <button type = "submit">Create</button>
 </form>

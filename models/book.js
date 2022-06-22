@@ -1,5 +1,8 @@
 const mongoose = require('mongoose') // Imports mongoose
 
+
+const coverImageBasePath = 'uploads/bookCovers'
+
 const bookSchema = new mongoose.Schema( { //Creates new schema with JSON name
     title: {
         type: String,
@@ -36,3 +39,5 @@ module.exports = mongoose.model('Book', bookSchema)
 // Exports model
 // 'Book" is the name of the model or what it is for 
 // bookSchema is the Schema we created above
+
+module.exports.coverImageBasePath = coverImageBasePath
