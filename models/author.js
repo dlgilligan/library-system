@@ -1,13 +1,23 @@
-const mongoose = require('mongoose') // Imports mongoose
+const mongoose = require('mongoose')
+const Book = require('./book')
 
-const authorSchema = new mongoose.Schema( { //Creates new schema with JSON name
-    name: {
-        type: String,
-        required: true
+const authorSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  }
+})
+
+authorSchema.pre('remove', function(next) {
+  Book.find({ author: this.id }, (err, books) => {
+    if (err) {
+      next(err)
+    } else if (books.length > 0) {
+      next(new Error('This author has books still'))
+    } else {
+      next()
     }
+  })
 })
 
 module.exports = mongoose.model('Author', authorSchema)
-// Exports model
-// 'Author" is the name of the model or what it is for 
-// authorSchema is the Schema we created above
